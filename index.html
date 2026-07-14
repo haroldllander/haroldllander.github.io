@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harold Llander – Web Developer & Technical Support Specialist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue-deep: #1B4FD8;
+      --blue-mid: #2563EB;
+      --blue-light: #DBEAFE;
+      --blue-xlight: #EFF6FF;
+      --white: #FFFFFF;
+      --gray-100: #F8FAFC;
+      --gray-200: #E2E8F0;
+      --gray-400: #94A3B8;
+      --gray-600: #475569;
+      --gray-800: #1E293B;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--gray-800); background: var(--white); line-height: 1.6; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--blue-deep); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.9rem; font-weight: 500; color: var(--gray-600); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--blue-mid); }
+
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 80px 2rem 60px;
+      background: linear-gradient(135deg, var(--white) 60%, var(--blue-xlight) 100%);
+    }
+    .hero-inner {
+      max-width: 920px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .hero-eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 1rem; }
+    .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; color: var(--gray-800); margin-bottom: 1.25rem; }
+    .hero h1 span { color: var(--blue-mid); }
+    .hero-desc { font-size: 0.97rem; color: var(--gray-600); margin-bottom: 2rem; line-height: 1.8; }
+    .btn-primary { display: inline-flex; align-items: center; background: var(--blue-mid); color: var(--white); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: background 0.2s, transform 0.2s; }
+    .btn-primary:hover { background: var(--blue-deep); transform: translateY(-1px); }
+    .btn-ghost { display: inline-flex; align-items: center; border: 1.5px solid var(--blue-mid); color: var(--blue-mid); padding: 0.75rem 1.75rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 1rem; transition: all 0.2s; }
+    .btn-ghost:hover { background: var(--blue-xlight); }
+
+    .stat-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(37,99,235,0.07); display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .stat-icon { width: 44px; height: 44px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+    .stat-label { font-size: 0.75rem; color: var(--gray-400); font-weight: 500; }
+    .stat-value { font-size: 0.95rem; font-weight: 700; color: var(--gray-800); }
+
+    section { padding: 80px 2rem; }
+    section:nth-child(even) { background: var(--gray-100); }
+    .section-inner { max-width: 920px; margin: 0 auto; }
+    .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue-mid); margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Sora', sans-serif; font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; color: var(--gray-800); margin-bottom: 1rem; }
+    .section-divider { width: 48px; height: 3px; background: var(--blue-mid); border-radius: 2px; margin-bottom: 2.5rem; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .about-text p { color: var(--gray-600); line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
+    .skills-group-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-400); margin-bottom: 0.5rem; margin-top: 1.25rem; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag { background: var(--blue-light); color: var(--blue-deep); font-size: 0.75rem; font-weight: 600; padding: 0.3rem 0.75rem; border-radius: 20px; }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .project-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 14px; padding: 1.75rem; transition: box-shadow 0.2s, transform 0.2s; display: flex; flex-direction: column; gap: 0.75rem; }
+    .project-card:hover { box-shadow: 0 8px 30px rgba(37,99,235,0.12); transform: translateY(-3px); }
+    .project-badge { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue-mid); background: var(--blue-light); padding: 0.25rem 0.65rem; border-radius: 20px; width: fit-content; }
+    .project-name { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--gray-800); }
+    .project-desc { font-size: 0.87rem; color: var(--gray-600); line-height: 1.7; }
+    .review-text { font-size: 0.8rem; color: #B45309; font-style: italic; }
+    .stars { color: #F59E0B; font-size: 0.85rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.5rem; }
+    .project-tag { font-size: 0.72rem; font-weight: 600; background: var(--gray-200); color: var(--gray-600); padding: 0.2rem 0.6rem; border-radius: 20px; }
+    .project-link { display: inline-flex; align-items: center; gap: 0.35rem; font-size: 0.82rem; font-weight: 600; color: var(--blue-mid); text-decoration: none; margin-top: 0.25rem; }
+    .project-link:hover { text-decoration: underline; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+    .contact-intro { font-size: 0.97rem; color: var(--gray-600); line-height: 1.85; }
+    .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-item { display: flex; align-items: center; gap: 1rem; background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1rem 1.25rem; text-decoration: none; color: var(--gray-800); transition: box-shadow 0.2s, border-color 0.2s; }
+    .contact-item:hover { border-color: var(--blue-mid); box-shadow: 0 2px 12px rgba(37,99,235,0.1); }
+    .contact-icon { width: 40px; height: 40px; background: var(--blue-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-detail-label { font-size: 0.7rem; color: var(--gray-400); font-weight: 600; text-transform: uppercase; }
+    .contact-detail-value { font-size: 0.9rem; font-weight: 600; color: var(--gray-800); }
+
+    footer { background: var(--gray-800); color: var(--gray-400); text-align: center; padding: 2rem; font-size: 0.82rem; }
+    footer span { color: var(--blue-light); }
+
+    @media (max-width: 700px) {
+      .hero-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .btn-ghost { margin-left: 0; margin-top: 0.75rem; display: inline-flex; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Harold Llander</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Web Developer & Technical Support Specialist</div>
+      <h1>Building reliable websites.<br><span>Solving real problems.</span></h1>
+      <p class="hero-desc">9+ years in technical support and web development. I build, maintain, and troubleshoot WordPress and Webflow sites — and make sure they stay online, fast, and secure.</p>
+      <div>
+        <a class="btn-primary" href="#projects">View My Work</a>
+        <a class="btn-ghost" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+    <div>
+      <div class="stat-card">
+        <div class="stat-icon">🌐</div>
+        <div>
+          <div class="stat-label">Live Client Sites Delivered</div>
+          <div class="stat-value">3 Projects — 5-Star Reviews</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚙️</div>
+        <div>
+          <div class="stat-label">Core Expertise</div>
+          <div class="stat-value">WordPress · Webflow · DNS · cPanel</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📅</div>
+        <div>
+          <div class="stat-label">Total Experience</div>
+          <div class="stat-value">9+ Years in Web & Technical Support</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-divider"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm Harold Llander, a web developer and technical support specialist based in Quezon City, Philippines. I've spent over 9 years helping businesses keep their digital presence running smoothly — from resolving complex DNS issues to building full client websites from scratch.</p>
+        <p>I've worked with web hosting companies including Melbourne IT, HostPapa, and Bluehost/Newfold Digital, giving me deep hands-on experience with cPanel, WHM, DNS, SPF/DKIM/DMARC, SSL, and email troubleshooting.</p>
+        <p>On the development side, I build and maintain WordPress and Webflow sites for real clients, with a focus on security, performance, and reliability. I'm available for freelance projects on Upwork and open to remote opportunities.</p>
+      </div>
+      <div>
+        <div class="skills-group-label">Web Development</div>
+        <div class="skills-list">
+          <span class="skill-tag">WordPress</span>
+          <span class="skill-tag">Webflow</span>
+          <span class="skill-tag">HTML / CSS</span>
+          <span class="skill-tag">Shopify</span>
+          <span class="skill-tag">GoDaddy Airo</span>
+        </div>
+        <div class="skills-group-label">Hosting & DNS</div>
+        <div class="skills-list">
+          <span class="skill-tag">cPanel / WHM</span>
+          <span class="skill-tag">DNS Configuration</span>
+          <span class="skill-tag">SPF / DKIM / DMARC</span>
+          <span class="skill-tag">SSL Certificates</span>
+          <span class="skill-tag">Nameserver Setup</span>
+        </div>
+        <div class="skills-group-label">Tools & Platforms</div>
+        <div class="skills-list">
+          <span class="skill-tag">Google Workspace</span>
+          <span class="skill-tag">Wordfence</span>
+          <span class="skill-tag">UpdraftPlus</span>
+          <span class="skill-tag">Zendesk</span>
+          <span class="skill-tag">Salesforce</span>
+          <span class="skill-tag">Complianz</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Client Work</div>
+    <h2 class="section-title">Portfolio & Projects</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-badge">⭐ 5-Star Review</div>
+        <div class="project-name">eliteot.com.au</div>
+        <p class="project-desc">Multi-page Webflow build for an NDIS occupational therapy clinic in Australia. Includes Services, Locations, Doctors, Pricing, and Articles pages.</p>
+        <div><span class="stars">★★★★★</span> <span class="review-text">"His expertise and honesty makes it a pleasure working with him."</span></div>
+        <div class="project-tags">
+          <span class="project-tag">Webflow</span>
+          <span class="project-tag">Multi-page</span>
+          <span class="project-tag">NDIS</span>
+          <span class="project-tag">Australia</span>
+        </div>
+        <a class="project-link" href="https://eliteot.com.au" target="_blank">Visit Site →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">⭐ 5-Star Review</div>
+        <div class="project-name">amyscomfortcare.com</div>
+        <p class="project-desc">WordPress site for an Assisted Living facility in Bakersfield, CA. Includes CPRA cookie consent, Wordfence security, SSL, Privacy Policy, and contact form setup.</p>
+        <div><span class="stars">★★★★★</span> <span class="review-text">Email and contact form fix — 5-star verified on Upwork.</span></div>
+        <div class="project-tags">
+          <span class="project-tag">WordPress</span>
+          <span class="project-tag">Complianz</span>
+          <span class="project-tag">Wordfence</span>
+          <span class="project-tag">SSL</span>
+        </div>
+        <a class="project-link" href="https://amyscomfortcare.com" target="_blank">Visit Site →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-badge">Live Site</div>
+        <div class="project-name">itherapy.ae</div>
+        <p class="project-desc">WordPress site for a UAE-based speech pathology clinic. Features WhatsApp chat integration, Slider Revolution, Google Tag Manager, SEO, and full mobile responsiveness.</p>
+        <div class="project-tags">
+          <span class="project-tag">WordPress</span>
+          <span class="project-tag">GTM</span>
+          <span class="project-tag">SEO</span>
+          <span class="project-tag">WhatsApp</span>
+          <span class="project-tag">UAE</span>
+        </div>
+        <a class="project-link" href="https://itherapy.ae" target="_blank">Visit Site →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">Let's Work Together</div>
+    <h2 class="section-title">Contact</h2>
+    <div class="section-divider"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro">I'm open to freelance projects, remote roles, and long-term collaborations. Whether you need a new website built, an existing one maintained, or technical support for your hosting setup — I'd love to hear from you.</p>
+      </div>
+      <div class="contact-items">
+        <a class="contact-item" href="mailto:haroldllander@gmail.com">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-value">haroldllander@gmail.com</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://t.me/harryllander" target="_blank">
+          <div class="contact-icon">💬</div>
+          <div>
+            <div class="contact-detail-label">Telegram</div>
+            <div class="contact-detail-value">@harryllander</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://www.upwork.com/freelancers/~01a7e56aa1656d4c18" target="_blank">
+          <div class="contact-icon">💼</div>
+          <div>
+            <div class="contact-detail-label">Upwork Profile</div>
+            <div class="contact-detail-value">View My Profile →</div>
+          </div>
+        </a>
+        <a class="contact-item" href="tel:+639932534161">
+          <div class="contact-icon">📞</div>
+          <div>
+            <div class="contact-detail-label">Phone</div>
+            <div class="contact-detail-value">+63-993-253-4161</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>Harold Llander</span> · Web Developer & Technical Support Specialist · Quezon City, Philippines</p>
+</footer>
+
+</body>
+</html>
